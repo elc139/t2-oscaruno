@@ -1,6 +1,6 @@
 # GNU Makefile
 
-CC = gcc 
+CC = clang 
 CCFLAGS = -Wall
 LDFLAGS = -pthread
 TARGET = pthreads_dotprod pthreads_dotprod2
