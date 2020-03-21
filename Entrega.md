@@ -13,7 +13,9 @@
 4. Mapeamento
 
 ### Questão 2
-
+- **1 Thread**: 5212472 usec
+- **2 Threads**: 2672517 usec
+- **Aceleração**: 1.95x *(t1/t2)*
 ### Questão 3
 
 ### Questão 4
