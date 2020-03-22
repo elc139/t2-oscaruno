@@ -11,7 +11,7 @@ Tendo em vista que o programa a ser analisado é uma implementação para calcul
 
 1. Particionamento
 
-    O particionamento é realizado na linha [41](https://github.com/elc139/t2-oscaruno/blob/5116f9ea18fa4661d6c8f466d41a440008d7cc26/pthreads_dotprod/pthreads_dotprod.c#L41):
+    O particionamento é realizado na linha [41](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod.c#L41):
 
     ```c
     mysum += (a[i] * b[i]);
@@ -20,7 +20,7 @@ Tendo em vista que o programa a ser analisado é uma implementação para calcul
 
 2. Comunicação
 
-    A comunicação, soma das somas parciais, é realizada na linha [46](https://github.com/elc139/t2-oscaruno/blob/5116f9ea18fa4661d6c8f466d41a440008d7cc26/pthreads_dotprod/pthreads_dotprod.c#L46) dentro de uma região crítica:
+    A comunicação, soma das somas parciais, é realizada na linha [46](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod.c#L46) dentro de uma região crítica:
     ```c
     pthread_mutex_lock (&mutexsum);
     dotdata.c += mysum;
@@ -29,7 +29,7 @@ Tendo em vista que o programa a ser analisado é uma implementação para calcul
 
 3. Aglomeração
 
-    Os produtos(multiplicações) são aglomeradas/juntados/somados em um laço, com o tamanho wsize, linha [40](https://github.com/elc139/t2-oscaruno/blob/5116f9ea18fa4661d6c8f466d41a440008d7cc26/pthreads_dotprod/pthreads_dotprod.c#L40):
+    Os produtos(multiplicações) são aglomeradas/juntados/somados em um laço, com o tamanho wsize, linha [40](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod.c#L40):
     ```c
     for (i = start; i < end ; i++)  {
         mysum += (a[i] * b[i]);
@@ -38,7 +38,7 @@ Tendo em vista que o programa a ser analisado é uma implementação para calcul
 
 4. Mapeamento
 
-    O mapeamento é feito de forma estática, onde cada thread executa o mesmo tamanho de cálculos/elementos, o qual é dado como argumento do programa, linha [68](https://github.com/elc139/t2-oscaruno/blob/5116f9ea18fa4661d6c8f466d41a440008d7cc26/pthreads_dotprod/pthreads_dotprod.c#L68):
+    O mapeamento é feito de forma estática, onde cada thread executa o mesmo tamanho de cálculos/elementos, o qual é dado como argumento do programa, linha [68](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod.c#L68):
     ```c
     for (i = 0; i < nthreads; i++) {
         pthread_create(&threads[i], &attr, dotprod_worker, (void *) i);
@@ -51,7 +51,7 @@ Tendo em vista que o programa a ser analisado é uma implementação para calcul
 -   **Aceleração**: 1.95x _(t1/t2)_
 
 ### Questão 3
-A aceleração se sustentou para outros casos de teste. Em torno de **1.6x** com o uso de **2 threads** e de **2.5x** com o uso de **4 threads**. Cada caso de teste foi executado **4x**, utilizou-se o [script](https://github.com/elc139/t2-oscaruno/blob/5116f9ea18fa4661d6c8f466d41a440008d7cc26/script.sh) para automatizar os testes.
+A aceleração se sustentou para outros casos de teste. Em torno de **1.6x** com o uso de **2 threads** e de **2.5x** com o uso de **4 threads**. Cada caso de teste foi executado **4x**, utilizou-se o [script](https://github.com/elc139/t2-oscaruno/blob/master/script.sh) para automatizar os testes.
 
 ### Questão 4
 
@@ -77,7 +77,7 @@ pthread_mutex_lock (&mutexsum);   // LINHA 45
 dotdata.c += mysum;               // LINHA 46
 pthread_mutex_unlock (&mutexsum); // LINHA 47
 ```
-no programa [pthreads_dotprod2.c](https://github.com/elc139/t2-oscaruno/blob/5116f9ea18fa4661d6c8f466d41a440008d7cc26/pthreads_dotprod/pthreads_dotprod2.c), as quais teriam a responsabilidade do acesso à área crítica do programa. Pelo fato de não se importar a ordem em que são somados os resultados parciais do produto interno, as linhas removidas não trazem inconsistência ao resultado final.
+no programa [pthreads_dotprod2.c](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod2.c), as quais teriam a responsabilidade do acesso à área crítica do programa. Pelo fato de não se importar a ordem em que são somados os resultados parciais do produto interno, as linhas removidas não trazem inconsistência ao resultado final.
 
 ## OpenMP
 
