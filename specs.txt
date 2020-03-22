@@ -1,0 +1,4 @@
+Processador: Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz, 4 Núcleos, 8 Threads
+Memória: 8 GiB SODIMM DDR4 Síncrono 2400 MHz 
+OS: Ubuntu 18.04.4 LTS
+Compilador: Clang/LLVM v. 6.0.0
