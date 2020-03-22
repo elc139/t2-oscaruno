@@ -77,8 +77,15 @@ pthread_mutex_lock (&mutexsum);   // LINHA 45
 dotdata.c += mysum;               // LINHA 46
 pthread_mutex_unlock (&mutexsum); // LINHA 47
 ```
-no programa [pthreads_dotprod2.c](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod2.c), as quais teriam a responsabilidade do acesso à área crítica do programa. Pelo fato de não se importar a ordem em que são somados os resultados parciais do produto interno, as linhas removidas não trazem inconsistência ao resultado final.
+no programa [pthreads_dotprod2.c](https://github.com/elc139/t2-oscaruno/blob/master/pthreads_dotprod/pthreads_dotprod2.c), as quais teriam a responsabilidade do acesso à área crítica do programa. Tendo em vista que o operador **+=** implementa três instruções, leitura, soma e escrita, existe a possibilidade da thread1 ler um valor, ser escalonada, outra thread2 completar essas 3 instruções, e o valor incrementado pela thread1 se tornar inconsistente. 
 
 ## OpenMP
 
 ## Referências
+- Assignment Operators:
+
+    https://en.cppreference.com/w/c/language/operator_assignment
+- C11 standard (ISO/IEC 9899:2011). *6.5.16* Assignment operators (p: 101-104)
+- SEBOR, Martin. Toward a Better Use of C11 Atomics – Part 1.
+
+    https://developers.redhat.com/blog/2016/01/14/toward-a-better-use-of-c11-atomics-part-1/
